@@ -27,6 +27,8 @@ jobs:
       - name: Run update-prices.js
         run: node update-prices.cjs
         working-directory: ./scripts
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
 
       - name: Commit and push if changed
         run: |

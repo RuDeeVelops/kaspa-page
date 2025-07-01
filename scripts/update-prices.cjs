@@ -10,7 +10,7 @@ const appPath = path.join(__dirname, '../src/App.jsx')
 // API endpoints
 const FMP_API = 'https://financialmodelingprep.com/api/v3/quote-short/'
 const FMP_SYMBOLS = ['^GSPC', 'BTCUSD', '^IXIC', 'XAUUSD']
-const FMP_URL = `${FMP_API}${FMP_SYMBOLS.join(',')}?apikey=demo`
+const FMP_URL = `${FMP_API}${FMP_SYMBOLS.join(',')}?apikey=${process.env.FMP_API_KEY}`
 const COINGECKO_KASPA_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd'
 
 async function fetchPrices() {
