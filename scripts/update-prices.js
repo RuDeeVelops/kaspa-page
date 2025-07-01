@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
+const fetch = require('node-fetch')
 
 // File to update
 const appPath = path.join(__dirname, '../src/App.jsx')
