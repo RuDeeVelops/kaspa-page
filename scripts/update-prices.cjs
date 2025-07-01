@@ -3,33 +3,37 @@
 const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
+const yahooFinance = require('yahoo-finance2').default
 
 // File to update
 const appPath = path.join(__dirname, '../src/App.jsx')
 
-// API endpoints
-const FMP_API = 'https://financialmodelingprep.com/api/v3/quote-short/'
-const FMP_SYMBOLS = ['^GSPC', 'BTCUSD', '^IXIC', 'XAUUSD']
-const FMP_URL = `${FMP_API}${FMP_SYMBOLS.join(',')}?apikey=${process.env.FMP_API_KEY}`
-const COINGECKO_KASPA_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd'
+// Yahoo Finance symbols
+const YAHOO_SYMBOLS = {
+  sp500: '^GSPC',
+  nasdaq: '^IXIC',
+  gold: 'GC=F', // Gold Futures
+}
+
+// CoinGecko API for BTC and Kaspa
+const COINGECKO_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,kaspa&vs_currencies=usd'
 
 async function fetchPrices() {
-  // Fetch S&P 500, BTC, Nasdaq, Gold
-  const fmpRes = await fetch(FMP_URL)
-  const fmpData = await fmpRes.json()
-  console.log('FMP API response:', fmpData)
-  if (!Array.isArray(fmpData)) {
-    throw new Error('FMP API did not return an array: ' + JSON.stringify(fmpData))
-  }
-  const sp500 = fmpData.find((d) => d.symbol === '^GSPC')?.price || 5277.0
-  const btc = fmpData.find((d) => d.symbol === 'BTCUSD')?.price || 69000
-  const nasdaq = fmpData.find((d) => d.symbol === '^IXIC')?.price || 16400.0
-  const gold = fmpData.find((d) => d.symbol === 'XAUUSD')?.price || 2300
+  // Fetch S&P 500, Nasdaq, Gold from Yahoo Finance
+  const [sp500Quote, nasdaqQuote, goldQuote] = await Promise.all([
+    yahooFinance.quote(YAHOO_SYMBOLS.sp500),
+    yahooFinance.quote(YAHOO_SYMBOLS.nasdaq),
+    yahooFinance.quote(YAHOO_SYMBOLS.gold),
+  ])
+  const sp500 = sp500Quote.regularMarketPrice || 5277.0
+  const nasdaq = nasdaqQuote.regularMarketPrice || 16400.0
+  const gold = goldQuote.regularMarketPrice || 2300
 
-  // Fetch Kaspa from CoinGecko
-  const kaspaRes = await fetch(COINGECKO_KASPA_URL)
-  const kaspaData = await kaspaRes.json()
-  const kaspa = kaspaData.kaspa?.usd || 0.091
+  // Fetch BTC and Kaspa from CoinGecko
+  const cgRes = await fetch(COINGECKO_URL)
+  const cgData = await cgRes.json()
+  const btc = cgData.bitcoin?.usd || 69000
+  const kaspa = cgData.kaspa?.usd || 0.091
 
   return { kaspa, sp500, btc, nasdaq, gold }
 }
