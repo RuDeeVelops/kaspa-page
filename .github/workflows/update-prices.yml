@@ -25,7 +25,7 @@ jobs:
         working-directory: ./scripts
 
       - name: Run update-prices.js
-        run: node update-prices.js
+        run: node update-prices.cjs
         working-directory: ./scripts
 
       - name: Commit and push if changed
