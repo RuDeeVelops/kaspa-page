@@ -22,11 +22,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install node-fetch@2
-        working-directory: ./kaspa-page/scripts
+        working-directory: ./scripts
 
       - name: Run update-prices.js
         run: node update-prices.js
-        working-directory: ./kaspa-page/scripts
+        working-directory: ./scripts
 
       - name: Commit and push if changed
         run: |
@@ -39,6 +39,6 @@ jobs:
           else
             echo 'No changes to commit.'
           fi
-        working-directory: ./kaspa-page/scripts
+        working-directory: ./scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
