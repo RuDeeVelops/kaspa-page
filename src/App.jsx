@@ -123,7 +123,7 @@ const App = () => {
   // Screenshot handler
   const handleShareScreenshot = async () => {
     if (screenshotRef.current) {
-      const canvas = await html2canvas(screenshotRef.current, { backgroundColor: null })
+      const canvas = await html2canvas(screenshotRef.current, { backgroundColor: null, scale: 2 })
       const imgData = canvas.toDataURL('image/png')
       setShareScreenshotUrl(imgData)
       setShowShareModal(true)
@@ -374,10 +374,10 @@ const App = () => {
           position: 'absolute',
           left: '-9999px',
           top: 0,
-          width: '420px',
+          width: '840px',
           background: 'rgba(31, 41, 55, 0.97)',
           borderRadius: '1rem',
-          padding: '2rem',
+          padding: '4rem',
           color: 'white',
           fontFamily: 'inherit',
           zIndex: -1,
@@ -386,7 +386,7 @@ const App = () => {
       >
         <h1
           style={{
-            fontSize: '2.2rem',
+            fontSize: '4.4rem',
             fontWeight: 800,
             marginBottom: '0.5rem',
             color: '#49EACB',
@@ -398,7 +398,7 @@ const App = () => {
         </h1>
         <div
           style={{
-            fontSize: '3.5rem',
+            fontSize: '7rem',
             fontWeight: 700,
             color: '#70C7BA',
             marginBottom: '0.5rem',
@@ -408,7 +408,7 @@ const App = () => {
         >
           {kaspaAnnualizedRoi.toFixed(2)}%
         </div>
-        <div style={{ fontSize: '1.1rem', color: '#B6B6B6', marginBottom: '1.2rem', textAlign: 'center' }}>Kaspa Annualized Return</div>
+        <div style={{ fontSize: '2.2rem', color: '#B6B6B6', marginBottom: '2.4rem', textAlign: 'center' }}>Kaspa Annualized Return</div>
         {/* Comparison assets */}
         <div
           style={{
@@ -418,32 +418,32 @@ const App = () => {
             placeItems: 'center',
             background: 'rgba(55, 65, 81, 0.7)',
             borderRadius: '0.7rem',
-            padding: '1.2rem 0.7rem',
-            marginBottom: '1.2rem',
-            fontSize: '1rem',
+            padding: '2.4rem 1.4rem',
+            marginBottom: '2.4rem',
+            fontSize: '2rem',
             width: '100%',
             textAlign: 'center',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70px', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '140px', width: '100%' }}>
             <span style={{ color: '#eab308', fontWeight: 600 }}>S&P 500</span>
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.15rem', marginTop: 2 }}>{sp500Roi.toFixed(2)}%</span>
+            <span style={{ color: '#fff', fontWeight: 700, fontSize: '2.3rem', marginTop: 4 }}>{sp500Roi.toFixed(2)}%</span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70px', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '140px', width: '100%' }}>
             <span style={{ color: '#f59e42', fontWeight: 600 }}>Bitcoin</span>
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.15rem', marginTop: 2 }}>{bitcoinRoi.toFixed(2)}%</span>
+            <span style={{ color: '#fff', fontWeight: 700, fontSize: '2.3rem', marginTop: 4 }}>{bitcoinRoi.toFixed(2)}%</span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70px', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '140px', width: '100%' }}>
             <span style={{ color: '#60a5fa', fontWeight: 600 }}>Nasdaq</span>
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.15rem', marginTop: 2 }}>{nasdaqRoi.toFixed(2)}%</span>
+            <span style={{ color: '#fff', fontWeight: 700, fontSize: '2.3rem', marginTop: 4 }}>{nasdaqRoi.toFixed(2)}%</span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70px', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '140px', width: '100%' }}>
             <span style={{ color: '#fbbf24', fontWeight: 600 }}>Gold</span>
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.15rem', marginTop: 2 }}>{goldRoi.toFixed(2)}%</span>
+            <span style={{ color: '#fff', fontWeight: 700, fontSize: '2.3rem', marginTop: 4 }}>{goldRoi.toFixed(2)}%</span>
           </div>
         </div>
-        <div style={{ fontSize: '1rem', color: '#ccc', marginBottom: '1.7rem', textAlign: 'center' }}>Period: May 26, 2022 to {formattedToday}</div>
-        <div style={{ fontSize: '1rem', color: '#49EACB', fontWeight: 700, letterSpacing: '0.1em', marginTop: '1.5rem', textAlign: 'right' }}>
+        <div style={{ fontSize: '2rem', color: '#ccc', marginBottom: '3.4rem', textAlign: 'center' }}>Period: May 26, 2022 to {formattedToday}</div>
+        <div style={{ fontSize: '2rem', color: '#49EACB', fontWeight: 700, letterSpacing: '0.1em', marginTop: '3rem', textAlign: 'right' }}>
           kaspa.page
         </div>
       </div>
