@@ -17,6 +17,10 @@ async function fetchPrices() {
   // Fetch S&P 500, BTC, Nasdaq, Gold
   const fmpRes = await fetch(FMP_URL)
   const fmpData = await fmpRes.json()
+  console.log('FMP API response:', fmpData)
+  if (!Array.isArray(fmpData)) {
+    throw new Error('FMP API did not return an array: ' + JSON.stringify(fmpData))
+  }
   const sp500 = fmpData.find((d) => d.symbol === '^GSPC')?.price || 5277.0
   const btc = fmpData.find((d) => d.symbol === 'BTCUSD')?.price || 69000
   const nasdaq = fmpData.find((d) => d.symbol === '^IXIC')?.price || 16400.0
